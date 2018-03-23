@@ -23,6 +23,7 @@ void setup() {
 }
 
 int lastError = 0;
+int error = 0;
 
 void loop() {
   // put your main code here, to run repeatedly:
