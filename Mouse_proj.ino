@@ -1,6 +1,6 @@
 #define PEAKPIN1 A1
 #define PEAKPIN2 A2
-#define MOTOR1 3
+#define MOTOR1 3 //TODO Edit maybe? Or make the names more descriptive
 #define MOTOR2 5
 #define Kp 0.1
 #define Kd 4
@@ -29,15 +29,19 @@ void loop() {
   // put your main code here, to run repeatedly:
   peak1 = analogRead(PEAKPIN1);
   peak2 = analogRead(PEAKPIN2);
-  Serial.println(peak1);
-  Serial.println(peak2);
+
   error = (peak2 - peak1);
   int motorspeed = Kp * error + Kd * (error - lastError);
   lastError = error;
 
   int rightMotorSpeed = baseSpeed + motorspeed;
   int leftMotorSpeed = baseSpeed - motorspeed;
-
+  Serial.print(peak1);
+  Serial.print("\t");
+  Serial.print(peak2);
+  Serial.print("\t");
+  Serial.print(leftMotorSpeed);
+  Serial.print("\n");
   if (rightMotorSpeed > maxSpeed) rightMotorSpeed = maxSpeed;
   if (leftMotorSpeed > maxSpeed) leftMotorSpeed = maxSpeed;
   if (rightMotorSpeed < 0) rightMotorSpeed = 0;
